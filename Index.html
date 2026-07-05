@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GitScope - GitHub Profile Analyzer</title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+
+        <div class="container">
+
+            <div class="logo">
+                <h1>GitScope</h1>
+            </div>
+
+            <nav class="nav">
+
+                <button
+                    id="theme-toggle"
+                    aria-label="Toggle Theme">
+                    🌙
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!-- Main -->
+    <main>
+
+        <!-- Hero -->
+        <section id="hero" class="hero">
+
+            <div class="container hero-content">
+
+                <span class="badge">
+                    GitHub Profile Analyzer
+                </span>
+
+                <h2>
+                    Discover Insights Behind Any GitHub Profile
+                </h2>
+
+                <p>
+                    Analyze repositories, languages, tech stack,
+                    developer timeline, achievements and more —
+                    all in one place.
+                </p>
+
+                <form id="search-form" autocomplete="off">
+
+                    <input
+                        id="username"
+                        type="text"
+                        placeholder="Enter GitHub username..."
+                        required>
+
+                    <button
+                        id="search-button"
+                        type="submit">
+                        Analyze
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Profile -->
+        <section id="profile">
+
+            <div class="container">
+
+                <div class="profile-card">
+
+                    <div class="profile-avatar">
+
+                        <img
+                            id="profile-avatar"
+                            src="https://avatars.githubusercontent.com/u/583231?v=4"
+                            alt="Profile Avatar">
+
+                    </div>
+
+                    <div class="profile-info">
+
+                        <h2 id="profile-name">
+                            The Octocat
+                        </h2>
+
+                        <span id="profile-login">
+                            @octocat
+                        </span>
+
+                        <p id="profile-bio">
+                            GitHub's mascot. Placeholder data until API integration.
+                        </p>
+
+                        <div class="profile-meta">
+
+                            <span id="profile-location">
+                                📍 San Francisco
+                            </span>
+
+                            <span id="profile-company">
+                                🏢 GitHub
+                            </span>
+
+                            <span id="profile-blog">
+                                🔗 github.blog
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Stats -->
+        <section id="stats">
+
+            <div class="container">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <h3>Repositories</h3>
+                        <span id="repo-count">-</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Followers</h3>
+                        <span id="followers-count">-</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Following</h3>
+                        <span id="following-count">-</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Total Stars</h3>
+                        <span id="stars-count">-</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Languages</h3>
+                        <span id="languages-count">-</span>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3>Developer Score</h3>
+                        <span id="developer-score">-</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Tech Stack -->
+        <section id="tech-stack">
+
+            <div class="container">
+
+                <h2>Tech Stack</h2>
+
+                <div
+                    id="tech-stack-container"
+                    class="placeholder">
+
+                    Waiting for analysis...
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Charts -->
+        <section id="charts">
+
+            <div class="container">
+
+                <h2>Charts</h2>
+
+                <div
+                    id="charts-container"
+                    class="placeholder">
+
+                    Charts will appear here.
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Repositories -->
+        <section id="repositories">
+
+            <div class="container">
+
+                <h2>Repositories</h2>
+
+                <div
+                    id="repositories-container"
+                    class="placeholder">
+
+                    No repositories yet.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="container">
+
+            <p>
+                GitScope © 2026
+            </p>
+
+            <small>
+                Powered by GitHub REST API
+            </small>
+
+        </div>
+
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

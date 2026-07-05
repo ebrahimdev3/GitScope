@@ -1,0 +1,65 @@
+/* ==================================
+   Responsive Design
+================================== */
+
+
+/* ===========
+   Large Tablets
+=========== */
+
+@media (max-width: 992px){
+
+}
+
+
+/* ===========
+   Tablets
+=========== */
+
+@media (max-width: 768px){
+
+    #search-form{
+
+        flex-direction: column;
+
+    }
+
+    #search-form button{
+
+        width: 100%;
+
+    }
+
+    .profile-card{
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+    .profile-meta{
+
+        justify-content: center;
+
+    }
+
+}
+
+
+/* ===========
+   Mobile
+=========== */
+
+@media (max-width: 576px){
+
+}
+
+
+/* ===========
+   Small Mobile
+=========== */
+
+@media (max-width: 400px){
+
+}
