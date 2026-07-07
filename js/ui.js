@@ -1,3 +1,5 @@
+import { formatDate, formatNumber } from "./utils.js";
+
 export function updateProfile(user) {
 
     const avatar = document.getElementById("profile-avatar");
@@ -18,22 +20,30 @@ export function updateProfile(user) {
     const location = document.getElementById("profile-location");
 const company = document.getElementById("profile-company");
 const blog = document.getElementById("profile-blog");
-blog.href = user.blog || "#";
+blog.href = user.blog
+    ? (user.blog.startsWith("http") ? user.blog : `https://${user.blog}`)
+    : "#";
+blog.target = "_blank";
+blog.rel = "noopener noreferrer";
 
-location.textContent = user.location ? `📍 ${user.location}` : "";
-company.textContent = user.company ? `🏢 ${user.company}` : "";
-blog.textContent = user.blog ? `🔗 ${user.blog}` : "";
+location.hidden = !user.location;
+company.hidden = !user.company;
+blog.hidden = !user.blog;
+
+location.textContent = `📍 ${user.location || ""}`;
+company.textContent = `🏢 ${user.company || ""}`;
+blog.textContent = `🔗 ${user.blog || ""}`;
 
    
 
     document.getElementById("repo-count").textContent =
-        user.public_repos;
+    formatNumber(user.public_repos);
 
-    document.getElementById("followers-count").textContent =
-        user.followers;
+document.getElementById("followers-count").textContent =
+    formatNumber(user.followers);
 
-    document.getElementById("following-count").textContent =
-        user.following;
+document.getElementById("following-count").textContent =
+    formatNumber(user.following);
 
 }
 
@@ -47,8 +57,8 @@ export function updateStatistics(repositories){
 
     );
 
-    document.getElementById("stars-count").textContent = totalStars;
-
+    document.getElementById("stars-count").textContent =
+    formatNumber(totalStars);
     const languages = new Set();
 
     repositories.forEach(repo => {
@@ -62,7 +72,7 @@ export function updateStatistics(repositories){
     });
 
     document.getElementById("languages-count").textContent =
-        languages.size;
+    formatNumber(languages.size);
 
 }
 
@@ -84,9 +94,7 @@ export function renderRepositories(repositories) {
 
     repositories.forEach(repo => {
 
-    const updated = new Date(repo.updated_at)
-        .toLocaleDateString();
-
+    const updated = formatDate(repo.updated_at);
     const card = document.createElement("div");
 
     card.className = "repository-card";
@@ -94,7 +102,6 @@ export function renderRepositories(repositories) {
     card.innerHTML = `
 
         <h3>${repo.name}</h3>
-
         <p>
             ${repo.description || "No description available."}
         </p>
@@ -103,14 +110,14 @@ export function renderRepositories(repositories) {
 
             <span>💻 ${repo.language || "Unknown"}</span>
 
-            <span>⭐ ${repo.stargazers_count}</span>
+            <span>⭐ ${formatNumber(repo.stargazers_count)}</span>
 
-            <span>🍴 ${repo.forks_count}</span>
+            <span>🍴 ${formatNumber(repo.forks_count)}</span>
 
         </div>
 
         <p class="repository-updated">
-            Updated: ${updated}
+            🕒 Updated on ${updated}
         </p>
 
         <a
@@ -127,5 +134,31 @@ export function renderRepositories(repositories) {
     container.appendChild(card);
 
 });
+
+}
+
+export function renderTechStack(repositories) {
+
+    const container = document.getElementById("tech-stack-container");
+
+    const languages = [...new Set(
+        repositories
+            .map(repo => repo.language)
+            .filter(Boolean)
+    )];
+
+    if (languages.length === 0) {
+
+        container.innerHTML = "<p>No technologies detected.</p>";
+
+        return;
+
+    }
+
+    container.innerHTML = languages.map(language => `
+        <span class="tech-badge">
+            ${language}
+        </span>
+    `).join("");
 
 }
