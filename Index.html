@@ -19,18 +19,16 @@
         <div class="container">
 
             <div class="logo">
-                <h1>GitScope</h1>
+
+    <h1>
+
+        <span class="logo-dot">◉</span>
+
+        <span class="logo-text">GitScope</span>
+
+    </h1>
+
             </div>
-
-            <nav class="nav">
-
-                <button
-                    id="theme-toggle"
-                    aria-label="Toggle Theme">
-                    🌙
-                </button>
-
-            </nav>
 
         </div>
 
@@ -38,6 +36,7 @@
 
     <!-- Main -->
     <main>
+      
 
         <!-- Hero -->
         <section id="hero" class="hero">
@@ -60,17 +59,51 @@
 
                 <form id="search-form" autocomplete="off">
 
-                    <input
-                        id="username"
-                        type="text"
-                        placeholder="Enter GitHub username..."
-                        required>
+    <div class="search-box">
 
-                    <button
-                        id="search-button"
-                        type="submit">
-                        Analyze
-                    </button>
+        <input
+            id="username"
+            type="text"
+            placeholder="Enter GitHub username..."
+            required>
+
+        <button id="search-button" type="submit">
+    🔍 Analyze
+        </button>
+
+    </div>
+
+    <div
+        id="quick-search"
+        class="quick-search hidden">
+
+        <span>Try:</span>
+
+        <button
+            type="button"
+            class="quick-user">
+            octocat
+        </button>
+
+        <button
+            type="button"
+            class="quick-user">
+            torvalds
+        </button>
+
+        <button
+            type="button"
+            class="quick-user">
+            gaearon
+        </button>
+
+        <button
+            type="button"
+            class="quick-user">
+            sindresorhus
+        </button>
+
+    </div>
 
                 </form>
 
@@ -78,8 +111,95 @@
 
         </section>
 
-        <!-- Profile -->
-        <section id="profile">
+      <section id="features">
+
+    <div class="container">
+
+        <h2>
+
+            What You'll Get
+
+        </h2>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <h3>📊 Analytics</h3>
+
+                <p>
+                    Repository statistics,
+                    stars and forks.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>💻 Tech Stack</h3>
+
+                <p>
+                    Detect technologies
+                    used by the developer.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>📈 Timeline</h3>
+
+                <p>
+                    Visualize repository
+                    history and activity.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>🏆 Developer Score</h3>
+
+                <p>
+                    Custom score based on
+                    GitHub activity.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+      </section>
+
+      <section id="empty-state">
+
+    <div class="container">
+
+        <div class="placeholder">
+
+            <h2>
+
+                🔍 Ready to Analyze
+
+            </h2>
+
+            <p>
+
+                Search for a GitHub username
+                to begin.
+
+            </p>
+
+        </div>
+
+    </div>
+
+      </section>
+      <section id="results" hidden>
+
+    <section id="profile">
 
             <div class="container">
 
@@ -88,40 +208,42 @@
                     <div class="profile-avatar">
 
                         <img
-                            id="profile-avatar"
-                            src="https://avatars.githubusercontent.com/u/583231?v=4"
-                            alt="Profile Avatar">
-
+    id="profile-avatar"
+    src=""
+    alt="GitHub Avatar"
+    hidden>
+  
                     </div>
 
                     <div class="profile-info">
 
                         <h2 id="profile-name">
-                            The Octocat
+                        
                         </h2>
 
                         <span id="profile-login">
-                            @octocat
+                            
                         </span>
 
                         <p id="profile-bio">
-                            GitHub's mascot. Placeholder data until API integration.
+                          
                         </p>
 
                         <div class="profile-meta">
 
                             <span id="profile-location">
-                                📍 San Francisco
+                               
                             </span>
 
                             <span id="profile-company">
-                                🏢 GitHub
+                                
                             </span>
 
-                            <span id="profile-blog">
-                                🔗 github.blog
-                            </span>
-
+                            <a
+    id="profile-blog"
+    target="_blank"
+    rel="noopener noreferrer">
+                            </a>
                         </div>
 
                     </div>
@@ -130,10 +252,9 @@
 
             </div>
 
-        </section>
+    </section>
 
-        <!-- Stats -->
-        <section id="stats">
+    <section id="stats">
 
             <div class="container">
 
@@ -173,12 +294,11 @@
 
             </div>
 
-        </section>
+    </section>
 
-        <!-- Tech Stack -->
-        <section id="tech-stack">
+    <section id="tech-stack">
 
-            <div class="container">
+    <div class="container">
 
                 <h2>Tech Stack</h2>
 
@@ -192,12 +312,12 @@
 
             </div>
 
-        </section>
 
-        <!-- Charts -->
-        <section id="charts">
+    </section>
 
-            <div class="container">
+    <section id="charts">
+
+        <div class="container">
 
                 <h2>Charts</h2>
 
@@ -211,12 +331,11 @@
 
             </div>
 
-        </section>
+    </section>
 
-        <!-- Repositories -->
-        <section id="repositories">
+    <section id="repositories">
 
-            <div class="container">
+        <div class="container">
 
                 <h2>Repositories</h2>
 
@@ -230,8 +349,10 @@
 
             </div>
 
-        </section>
 
+    </section>
+
+      </section>
     </main>
 
     <!-- Footer -->

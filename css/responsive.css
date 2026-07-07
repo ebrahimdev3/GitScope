@@ -63,3 +63,53 @@
 @media (max-width: 400px){
 
 }
+@media (max-width:768px){
+
+    .hero{
+        padding:3rem 1rem;
+    }
+
+    .hero h2{
+        font-size:2rem;
+        line-height:1.2;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+
+    .search-box{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+    }
+
+    #username,
+    #search-button{
+        width:100%;
+    }
+
+    .profile-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .profile-meta{
+        justify-content:center;
+    }
+
+    .features-grid{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:1rem;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .repository-card{
+        padding:1rem;
+    }
+
+}
