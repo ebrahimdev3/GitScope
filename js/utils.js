@@ -7,9 +7,65 @@ export function formatNumber(number) {
 }
 
 export function show(id) {
-    document.getElementById(id).hidden = false;
+
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.hidden = false;
+    }
+
 }
 
 export function hide(id) {
-    document.getElementById(id).hidden = true;
+
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.hidden = true;
+    }
+
+}
+export function showError(message) {
+
+    const error = document.getElementById("error-message");
+
+    if (!error) return;
+
+    error.textContent = message;
+    error.hidden = false;
+
+}
+
+export function hideError() {
+
+    const error = document.getElementById("error-message");
+
+    if (!error) return;
+
+    error.hidden = true;
+    error.textContent = "";
+
+}
+export function showLoading() {
+
+    const loading = document.getElementById("loading");
+
+    if (loading) {
+
+        loading.hidden = false;
+
+    }
+
+}
+
+export function hideLoading() {
+
+    const loading = document.getElementById("loading");
+
+    if (loading) {
+
+        loading.hidden = true;
+
+    }
+
 }

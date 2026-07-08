@@ -57,7 +57,7 @@
                     all in one place.
                 </p>
 
-                <form id="search-form" autocomplete="off">
+                <form id="search-form" autocomplete="on">
 
     <div class="search-box">
 
@@ -79,40 +79,42 @@
     </button>
 
   </div>
-    <div
-        id="quick-search"
-        class="quick-search hidden">
+    <div id="quick-search" class="quick-search hidden">
 
-        <span>Try:</span>
+    <span>⭐ Popular Developers</span>
 
-        <button
-            type="button"
-            class="quick-user">
-            octocat
-        </button>
+    <div id="popular-searches">
 
-        <button
-            type="button"
-            class="quick-user">
-            torvalds
-        </button>
+        <button type="button" class="quick-user">octocat</button>
+        <button type="button" class="quick-user">torvalds</button>
+        <button type="button" class="quick-user">gaearon</button>
+        <button type="button" class="quick-user">sindresorhus</button>
 
-        <button
-            type="button"
-            class="quick-user">
-            gaearon
-        </button>
+    </div>
 
-        <button
-            type="button"
-            class="quick-user">
-            sindresorhus
-        </button>
+    <hr>
+
+    <span>🕘 Recent Searches</span>
+
+    <div id="recent-searches">
+
+</div>
+
+<button 
+    id="clear-history"
+    type="button">
+    🗑 Clear History
+</button>
+    
 
     </div>
 
                 </form>
-
+              
+                <div id="loading" class="loading" hidden>
+    <div class="spinner"></div>
+    <p>Analyzing GitHub profile...</p>
+                </div>
             </div>
 
         </section>
@@ -294,6 +296,10 @@
                     <div class="stat-card">
                         <h3>Developer Score</h3>
                         <span id="developer-score">-</span>
+                        <small id="developer-level">
+        Waiting...
+    </small>
+
                     </div>
 
                 </div>
@@ -377,7 +383,7 @@
         </div>
 
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="js/app.js"></script>
 
 </body>

@@ -141,24 +141,94 @@ export function renderTechStack(repositories) {
 
     const container = document.getElementById("tech-stack-container");
 
-    const languages = [...new Set(
-        repositories
-            .map(repo => repo.language)
-            .filter(Boolean)
-    )];
+    container.innerHTML = "";
 
-    if (languages.length === 0) {
+    const techs = {};
 
-        container.innerHTML = "<p>No technologies detected.</p>";
+    repositories.forEach(repo => {
+
+        if (!repo.language) return;
+
+        techs[repo.language] =
+            (techs[repo.language] || 0) + 1;
+
+    });
+
+    const sorted = Object.entries(techs)
+        .sort((a, b) => b[1] - a[1]);
+
+    if (sorted.length === 0) {
+
+        container.innerHTML =
+            "<p>No technologies detected.</p>";
 
         return;
 
     }
 
-    container.innerHTML = languages.map(language => `
-        <span class="tech-badge">
-            ${language}
-        </span>
-    `).join("");
+    const fragment = document.createDocumentFragment();
+
+sorted.forEach(([language, count]) => {
+
+    const badge = document.createElement("div");
+
+    badge.className = "tech-badge";
+
+    const percentage = Math.round(
+    (count / repositories.length) * 100
+);
+
+badge.innerHTML = `
+    <div class="tech-header">
+        <strong>${language}</strong>
+        <span>${percentage}%</span>
+    </div>
+
+    <div class="tech-progress">
+
+        <div
+            class="tech-progress-bar"
+            style="width:${percentage}%">
+        </div>
+
+    </div>
+
+    <small>${formatNumber(count)} repositories</small>
+`;
+    fragment.appendChild(badge);
+
+});
+
+container.appendChild(fragment);
+  
+}
+
+export function updateDeveloperLevel(score) {
+
+    const level = document.getElementById("developer-level");
+
+    if (!level) return;
+
+    if (score >= 90) {
+
+        level.textContent = "🏆 Elite Developer";
+
+    } else if (score >= 75) {
+
+        level.textContent = "🟢 Advanced Developer";
+
+    } else if (score >= 50) {
+
+        level.textContent = "🟡 Intermediate Developer";
+
+    } else if (score >= 25) {
+
+        level.textContent = "🟠 Beginner Developer";
+
+    } else {
+
+        level.textContent = "🔴 New Developer";
+
+    }
 
 }

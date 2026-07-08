@@ -3,17 +3,33 @@ import {
     updateProfile,
     updateStatistics,
     renderRepositories,
-    renderTechStack
+    renderTechStack,
+    updateDeveloperLevel
 } from "./ui.js";
 import { loginWithGitHub } from "./auth.js";
-import { show, hide } from "./utils.js";
+import {
+    show,
+    hide,
+    showError,
+    hideError,
+    showLoading,
+    hideLoading
+} from "./utils.js";
 import { calculateDeveloperScore } from "./analytics.js";
+import { renderCharts } from "./charts.js";
+import {
+    saveSearch,
+    renderSearchHistory,
+    clearSearchHistory
+} from "./history.js";
 
-
+const searchButton = document.getElementById("search-button");
 const form = document.getElementById("search-form");
 const input = document.getElementById("username");
 const githubLogin = document.getElementById("github-login");
 const quickSearch = document.getElementById("quick-search");
+const clearHistoryButton = document.getElementById("clear-history");
+let isSearching = false;
 if (quickSearch && input) {
 
     input.addEventListener("focus", () => {
@@ -31,17 +47,27 @@ if (quickSearch && input) {
 
     });
 
-    document.querySelectorAll(".quick-user").forEach(button => {
+    quickSearch.addEventListener("click", (event) => {
 
-        button.addEventListener("click", () => {
+    const button = event.target.closest(".quick-user");
 
-            input.value = button.textContent.trim();
+    if (!button) return;
 
-            quickSearch.classList.add("hidden");
+    input.value = button.textContent.trim();
 
-            form.requestSubmit();
+    quickSearch.classList.add("hidden");
 
-        });
+    form?.requestSubmit();
+
+});
+  
+}
+
+if (clearHistoryButton) {
+
+    clearHistoryButton.addEventListener("click", () => {
+
+        clearSearchHistory();
 
     });
 
@@ -64,11 +90,25 @@ form.addEventListener("submit", async (event) => {
 
     if (!username) return;
 
+    if (isSearching) return;
+
+    isSearching = true;
+
     try {
+      hideError();
+      showLoading();
+      if (searchButton) {
+        searchButton.disabled = true;
+        searchButton.textContent = "⏳ Analyzing...";
+      }
 
         const user = await getUser(username);
         const repos = await getRepositories(username);
 
+        saveSearch(username);
+        renderSearchHistory();
+
+        input.blur();
         updateProfile(user);
         updateStatistics(repos);
 
@@ -78,19 +118,45 @@ form.addEventListener("submit", async (event) => {
 
 if (scoreElement) {
     scoreElement.textContent = `${score}/100`;
-}
+}  
+    updateDeveloperLevel(score);
+      
         renderRepositories(repos);
         renderTechStack(repos);
-
+        renderCharts(repos);
+      
+        hideLoading();
+      
+        if (searchButton) {
+    searchButton.disabled = false;
+    searchButton.textContent = "🔍 Analyze";
+        }
+      
+        isSearching = false;
+      
         hide("empty-state");
         show("results");
 
     } catch (error) {
+      
+        hideLoading();
 
-        console.error(error.message);
+      if (searchButton) {
+        searchButton.disabled = false;
+        searchButton.textContent = "🔍 Analyze";
+      }
 
+       isSearching = false;
+
+        console.error(error);
+
+        showError(error.message);
+        
+        input.focus();
     }
+  
 
 });
 
 }
+renderSearchHistory();

@@ -2,17 +2,21 @@ export function calculateDeveloperScore(user, repositories) {
 
     let score = 0;
 
-    score += Math.min(user.public_repos, 30);
+    // Repositories (20)
+    score += Math.min(user.public_repos, 20);
 
-    score += Math.min(user.followers, 25);
+    // Followers (20)
+    score += Math.min(user.followers / 5, 20);
 
-    const stars = repositories.reduce(
-        (total, repo) => total + repo.stargazers_count,
+    // Stars (20)
+    const totalStars = repositories.reduce(
+        (sum, repo) => sum + repo.stargazers_count,
         0
     );
 
-    score += Math.min(stars, 25);
+    score += Math.min(totalStars / 10, 20);
 
+    // Languages (15)
     const languages = new Set();
 
     repositories.forEach(repo => {
@@ -21,8 +25,31 @@ export function calculateDeveloperScore(user, repositories) {
         }
     });
 
-    score += Math.min(languages.size * 2, 20);
+    score += Math.min(languages.size * 2, 15);
 
-    return Math.min(score, 100);
+    // Recent Activity (15)
+    const activeRepos = repositories.filter(repo => {
+
+        const updated = new Date(repo.updated_at);
+
+        const months =
+            (Date.now() - updated.getTime()) /
+            (1000 * 60 * 60 * 24 * 30);
+
+        return months <= 12;
+
+    });
+
+    score += Math.min(activeRepos.length, 15);
+
+    // Profile Completeness (10)
+
+    if (user.bio) score += 2;
+    if (user.blog) score += 2;
+    if (user.company) score += 2;
+    if (user.location) score += 2;
+    if (user.avatar_url) score += 2;
+
+    return Math.round(Math.min(score, 100));
 
 }
