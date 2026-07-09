@@ -94,42 +94,58 @@ export function renderRepositories(repositories) {
 
     repositories.forEach(repo => {
 
+    const created = formatDate(repo.created_at);
+
     const updated = formatDate(repo.updated_at);
+
     const card = document.createElement("div");
 
     card.className = "repository-card";
 
     card.innerHTML = `
 
-        <h3>${repo.name}</h3>
-        <p>
-            ${repo.description || "No description available."}
-        </p>
+    <h3>${repo.name}</h3>
 
-        <div class="repository-meta">
+    <p>
+        ${repo.description || "No description available."}
+    </p>
 
-            <span>💻 ${repo.language || "Unknown"}</span>
+    <div class="repository-meta">
 
-            <span>⭐ ${formatNumber(repo.stargazers_count)}</span>
+        <span>💻 ${repo.language || "Unknown"}</span>
 
-            <span>🍴 ${formatNumber(repo.forks_count)}</span>
+        <span>⭐ ${formatNumber(repo.stargazers_count)}</span>
 
-        </div>
+        <span>🍴 ${formatNumber(repo.forks_count)}</span>
 
-        <p class="repository-updated">
-            🕒 Updated on ${updated}
-        </p>
+        <span>👀 ${formatNumber(repo.watchers_count)}</span>
 
-        <a
-            href="${repo.html_url}"
-            target="_blank"
-            rel="noopener noreferrer">
+        <span>🐞 ${formatNumber(repo.open_issues_count)}</span>
 
-            Open on GitHub
+    </div>
 
-        </a>
+    <div class="repository-timeline">
 
-    `;
+        <span>📅 Created: ${created}</span>
+
+        <span>🕒 Updated: ${updated}</span>
+
+        <span>🌿 ${repo.default_branch}</span>
+
+        <span>${repo.archived ? "📦 Archived" : "🟢 Active"}</span>
+
+    </div>
+
+    <a
+        href="${repo.html_url}"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        Open on GitHub
+
+    </a>
+
+`;
 
     container.appendChild(card);
 
@@ -147,13 +163,60 @@ export function renderTechStack(repositories) {
 
     repositories.forEach(repo => {
 
-        if (!repo.language) return;
+        const language = repo.language;
 
-        techs[repo.language] =
-            (techs[repo.language] || 0) + 1;
+        const text = `
+            ${repo.name || ""}
+            ${repo.description || ""}
+        `.toLowerCase();
+
+        // Frameworks
+
+        if (text.includes("react"))
+            techs.React = (techs.React || 0) + 1;
+
+        if (text.includes("next"))
+            techs["Next.js"] = (techs["Next.js"] || 0) + 1;
+
+        if (text.includes("vue"))
+            techs.Vue = (techs.Vue || 0) + 1;
+
+        if (text.includes("angular"))
+            techs.Angular = (techs.Angular || 0) + 1;
+
+        if (text.includes("express"))
+            techs.Express = (techs.Express || 0) + 1;
+
+        if (text.includes("fastapi"))
+            techs.FastAPI = (techs.FastAPI || 0) + 1;
+
+        if (text.includes("django"))
+            techs.Django = (techs.Django || 0) + 1;
+
+        if (text.includes("flask"))
+            techs.Flask = (techs.Flask || 0) + 1;
+
+        if (text.includes("laravel"))
+            techs.Laravel = (techs.Laravel || 0) + 1;
+
+        if (text.includes("tailwind"))
+            techs.TailwindCSS = (techs.TailwindCSS || 0) + 1;
+
+        if (text.includes("bootstrap"))
+            techs.Bootstrap = (techs.Bootstrap || 0) + 1;
+
+        if (text.includes("docker"))
+            techs.Docker = (techs.Docker || 0) + 1;
+
+        // Programming Language
+
+        if (language) {
+            techs[language] = (techs[language] || 0) + 1;
+        }
 
     });
-
+    const total = Object.values(techs)
+    .reduce((sum, value) => sum + value, 0) || 1;
     const sorted = Object.entries(techs)
         .sort((a, b) => b[1] - a[1]);
 
@@ -168,39 +231,39 @@ export function renderTechStack(repositories) {
 
     const fragment = document.createDocumentFragment();
 
-sorted.forEach(([language, count]) => {
+    sorted.forEach(([tech, count]) => {
 
-    const badge = document.createElement("div");
+        const badge = document.createElement("div");
 
-    badge.className = "tech-badge";
+        badge.className = "tech-badge";
 
-    const percentage = Math.round(
-    (count / repositories.length) * 100
+        const percentage = Math.round(
+    (count / total) * 100
 );
+        
 
-badge.innerHTML = `
-    <div class="tech-header">
-        <strong>${language}</strong>
-        <span>${percentage}%</span>
-    </div>
+        badge.innerHTML = `
+            <div class="tech-header">
+                <strong>${tech}</strong>
+                <span>${percentage}%</span>
+            </div>
 
-    <div class="tech-progress">
+            <div class="tech-progress">
+                <div
+                    class="tech-progress-bar"
+                    style="width:${percentage}%">
+                </div>
+            </div>
 
-        <div
-            class="tech-progress-bar"
-            style="width:${percentage}%">
-        </div>
+            <small>${formatNumber(count)} repositories</small>
+        `;
 
-    </div>
+        fragment.appendChild(badge);
 
-    <small>${formatNumber(count)} repositories</small>
-`;
-    fragment.appendChild(badge);
+    });
 
-});
+    container.appendChild(fragment);
 
-container.appendChild(fragment);
-  
 }
 
 export function updateDeveloperLevel(score) {

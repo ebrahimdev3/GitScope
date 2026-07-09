@@ -120,7 +120,7 @@ if (scoreElement) {
     scoreElement.textContent = `${score}/100`;
 }  
     updateDeveloperLevel(score);
-      
+        
         renderRepositories(repos);
         renderTechStack(repos);
         renderCharts(repos);
