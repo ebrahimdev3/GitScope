@@ -1,4 +1,7 @@
-import { getUser, getRepositories } from "./api.js";
+import { 
+    getUser,
+    getRepositories,
+} from "./api.js";
 import {
     updateProfile,
     updateStatistics,
@@ -29,6 +32,78 @@ const input = document.getElementById("username");
 const githubLogin = document.getElementById("github-login");
 const quickSearch = document.getElementById("quick-search");
 const clearHistoryButton = document.getElementById("clear-history");
+
+let authenticatedUser = null;
+
+async function loadGitHubUser() {
+
+    const token =
+        localStorage.getItem("github-access-token");
+
+    if (!token) return;
+
+    try {
+
+        const response = await fetch(
+
+            "https://api.github.com/user",
+
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+        );
+
+        if (!response.ok) return;
+
+        const user = await response.json();
+        authenticatedUser = user;
+
+        const userBox =
+            document.getElementById("github-user");
+
+        const avatar =
+            document.getElementById("github-user-avatar");
+
+        const name =
+            document.getElementById("github-user-name");
+
+        if (githubLogin) {
+
+    githubLogin.hidden = true;
+
+        }
+
+
+        if (userBox) {
+
+            userBox.hidden = false;
+
+        }
+
+        if (avatar) {
+
+            avatar.src = user.avatar_url;
+
+        }
+
+        if (name) {
+
+            name.textContent =
+                user.name || user.login;
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
 let isSearching = false;
 if (quickSearch && input) {
 
@@ -110,6 +185,19 @@ form.addEventListener("submit", async (event) => {
 
         input.blur();
         updateProfile(user);
+        const ownProfile =
+    authenticatedUser &&
+    authenticatedUser.login.toLowerCase() ===
+    user.login.toLowerCase();
+
+const ownProfileBadge =
+    document.getElementById("own-profile");
+
+if (ownProfileBadge) {
+
+    ownProfileBadge.hidden = !ownProfile;
+
+}
         updateStatistics(repos);
 
         const score = calculateDeveloperScore(user, repos);
@@ -160,3 +248,4 @@ if (scoreElement) {
 
 }
 renderSearchHistory();
+loadGitHubUser();

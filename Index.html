@@ -13,24 +13,44 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header class="header">
 
-        <div class="container">
+    <div class="container">
 
-            <div class="logo">
+        <div class="logo">
 
-    <h1>
+            <h1>
 
-        <span class="logo-dot">◉</span>
+                <span class="logo-dot">◉</span>
 
-        <span class="logo-text">GitScope</span>
+                <span class="logo-text">GitScope</span>
 
-    </h1>
+            </h1>
+
+        </div>
+
+        <div class="header-actions">
+
+            <button id="github-login">
+
+                Sign in with GitHub
+
+            </button>
+
+            <div id="github-user" hidden>
+
+                <img
+                    id="github-user-avatar"
+                    src=""
+                    alt="GitHub Avatar">
+
+                <span id="github-user-name"></span>
 
             </div>
 
         </div>
+
+    </div>
 
     </header>
 
@@ -72,13 +92,7 @@
         </button>
 
     </div>
-  <div class="auth-buttons">
-
-    <button id="github-login" type="button">
-        Sign in with GitHub
-    </button>
-
-  </div>
+  
     <div id="quick-search" class="quick-search hidden">
 
     <span>⭐ Popular Developers</span>
@@ -229,9 +243,16 @@
                         
                         </h2>
 
-                        <span id="profile-login">
-                            
-                        </span>
+                        <span id="profile-login"></span>
+
+<small
+    id="own-profile"
+    hidden>
+
+    ✨ This is your profile
+
+</small>
+                          
 
                         <p id="profile-bio">
                           
