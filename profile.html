@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitScope - GitHub Profile</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>
+                    <span class="logo-dot">◉</span>
+                    <span class="logo-text">GitScope</span>
+                </h1>
+            </div>
+            <div class="header-actions">
+                <button id="back-button">← Back</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <!-- Loading State -->
+        <div id="profile-loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading profile...</p>
+        </div>
+
+        <!-- Authenticated User Profile View -->
+        <section class="profile-page" hidden>
+            <div class="container">
+                <div class="profile-page-card">
+                    <img id="account-avatar" class="profile-page-avatar" src="" alt="GitHub Avatar">
+                    <h2 id="account-name"></h2>
+                    <p id="account-login"></p>
+                    <p id="account-bio"></p>
+
+                    <div class="profile-meta">
+                        <span id="account-location"></span>
+                        <span id="account-company"></span>
+                        <a id="account-blog" target="_blank" rel="noopener noreferrer"></a>
+                        <span id="account-created"></span>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Public Gists</h3>
+                            <span id="account-gists"></span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Repositories</h3>
+                            <span id="account-repos"></span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Followers</h3>
+                            <span id="account-followers"></span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Following</h3>
+                            <span id="account-following"></span>
+                        </div>
+                    </div>
+
+                    <div class="profile-actions">
+                        <button id="analyze-my-profile">🔍 Analyze My Profile</button>
+                        <a id="account-github-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                        <button id="logout-button">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>GitScope © 2026</p>
+        </div>
+    </footer>
+  
+    <!-- Scripts -->
+    <script type="module" src="js/profile.js"></script>
+</body>
+</html>

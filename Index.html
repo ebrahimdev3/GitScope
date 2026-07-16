@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>GitScope - GitHub Profile Analyzer</title>
-
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components.css">
@@ -13,404 +11,226 @@
 </head>
 <body>
 
+    <!-- Header -->
     <header class="header">
-
-    <div class="container">
-
-        <div class="logo">
-
-            <h1>
-
-                <span class="logo-dot">◉</span>
-
-                <span class="logo-text">GitScope</span>
-
-            </h1>
-
-        </div>
-
-        <div class="header-actions">
-
-            <button id="github-login">
-
-                Sign in with GitHub
-
-            </button>
-
-            <div id="github-user" hidden>
-
-                <img
-                    id="github-user-avatar"
-                    src=""
-                    alt="GitHub Avatar">
-
-                <span id="github-user-name"></span>
-
+        <div class="container">
+            <div class="logo">
+                <h1>
+                    <span class="logo-dot">◉</span>
+                    <span class="logo-text">GitScope</span>
+                </h1>
             </div>
-
+            <div class="header-actions">
+                <button id="github-login">Sign in with GitHub</button>
+                <div id="github-user" hidden>
+                    <img id="github-user-avatar" src="" alt="GitHub Avatar">
+                    <span id="github-user-name"></span>
+                </div>
+            </div>
         </div>
-
-    </div>
-
     </header>
 
-    <!-- Main -->
+    <!-- Main Content -->
     <main>
-      
-
-        <!-- Hero -->
+        <!-- Hero & Search Section -->
         <section id="hero" class="hero">
-
             <div class="container hero-content">
-
-                <span class="badge">
-                    GitHub Profile Analyzer
-                </span>
-
-                <h2>
-                    Discover Insights Behind Any GitHub Profile
-                </h2>
-
+                <span class="badge">GitHub Profile Analyzer</span>
+                <h2>Discover Insights Behind Any GitHub Profile</h2>
                 <p>
-                    Analyze repositories, languages, tech stack,
-                    developer timeline, achievements and more —
-                    all in one place.
+                    Analyze repositories, languages, tech stack, developer timeline, achievements and more — all in one place.
                 </p>
+
+                <!-- Error Message Container (Crucial for ui.js) -->
+                <div id="error-message" class="error-banner" hidden></div>
 
                 <form id="search-form" autocomplete="on">
-
-    <div class="search-box">
-
-        <input
-            id="username"
-            type="text"
-            placeholder="Enter GitHub username..."
-            required>
-
-        <button id="search-button" type="submit">
-    🔍 Analyze
-        </button>
-
-    </div>
-  
-    <div id="quick-search" class="quick-search hidden">
-
-    <span>⭐ Popular Developers</span>
-
-    <div id="popular-searches">
-
-        <button type="button" class="quick-user">octocat</button>
-        <button type="button" class="quick-user">torvalds</button>
-        <button type="button" class="quick-user">gaearon</button>
-        <button type="button" class="quick-user">sindresorhus</button>
-
-    </div>
-
-    <hr>
-
-    <span>🕘 Recent Searches</span>
-
-    <div id="recent-searches">
-
-</div>
-
-<button 
-    id="clear-history"
-    type="button">
-    🗑 Clear History
-</button>
-    
-
-    </div>
-
+                    <div class="search-box">
+                        <input id="username" type="text" placeholder="Enter GitHub username..." required>
+                        <button id="search-button" type="submit">🔍 Analyze</button>
+                    </div>
+                    
+                    <!-- Search History Dropdown -->
+                    <div id="quick-search" class="quick-search hidden">
+                        <span>⭐ Popular Developers</span>
+                        <div id="popular-searches">
+                            <button type="button" class="quick-user">octocat</button>
+                            <button type="button" class="quick-user">torvalds</button>
+                            <button type="button" class="quick-user">gaearon</button>
+                            <button type="button" class="quick-user">sindresorhus</button>
+                        </div>
+                        <hr>
+                        <span>🕘 Recent Searches</span>
+                        <div id="recent-searches"></div>
+                        <button id="clear-history" type="button">🗑 Clear History</button>
+                    </div>
                 </form>
+
+                <!-- Comparison Form -->
+                <section class="compare-section">
+                    <h2>GitHub Compare</h2>
+                    <div class="compare-box">
+                        <input id="compare-user-1" type="text" placeholder="First GitHub username">
+                        <div class="compare-divider"></div>
+                        <input id="compare-user-2" type="text" placeholder="Second GitHub username">
+                        <button id="compare-button">Compare</button>
+                    </div>
+                </section>
+
               
+                <!-- Loading Spinner -->
                 <div id="loading" class="loading" hidden>
-    <div class="spinner"></div>
-    <p>Analyzing GitHub profile...</p>
+                    <div class="spinner"></div>
+                    <p>Analyzing GitHub profile...</p>
                 </div>
             </div>
-
         </section>
 
-      <section id="features">
-
-    <div class="container">
-
-        <h2>
-
-            What You'll Get
-
-        </h2>
-
-        <div class="features-grid">
-
-            <div class="feature-card">
-
-                <h3>📊 Analytics</h3>
-
-                <p>
-                    Repository statistics,
-                    stars and forks.
-                </p>
-
-            </div>
-
-            <div class="feature-card">
-
-                <h3>💻 Tech Stack</h3>
-
-                <p>
-                    Detect technologies
-                    used by the developer.
-                </p>
-
-            </div>
-
-            <div class="feature-card">
-
-                <h3>📈 Timeline</h3>
-
-                <p>
-                    Visualize repository
-                    history and activity.
-                </p>
-
-            </div>
-
-            <div class="feature-card">
-
-                <h3>🏆 Developer Score</h3>
-
-                <p>
-                    Custom score based on
-                    GitHub activity.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-      </section>
-
-      <section id="empty-state">
-
-    <div class="container">
-
-        <div class="placeholder">
-
-            <h2>
-
-                🔍 Ready to Analyze
-
-            </h2>
-
-            <p>
-
-                Search for a GitHub username
-                to begin.
-
-            </p>
-
-        </div>
-
-    </div>
-
-      </section>
-      <section id="results" hidden>
-
-    <section id="profile">
-
+        <!-- Features Overview -->
+        <section id="features">
             <div class="container">
-
-                <div class="profile-card">
-
-                    <div class="profile-avatar">
-
-                        <img
-    id="profile-avatar"
-    src=""
-    alt="GitHub Avatar"
-    hidden>
-  
+                <h2>What You'll Get</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>📊 Analytics</h3>
+                        <p>Repository statistics, stars and forks.</p>
                     </div>
+                    <div class="feature-card">
+                        <h3>💻 Tech Stack</h3>
+                        <p>Detect technologies used by the developer.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📈 Timeline</h3>
+                        <p>Visualize repository history and activity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🏆 Developer Score</h3>
+                        <p>Custom score based on GitHub activity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="profile-info">
+        <!-- Empty State (Shown before any search) -->
+        <section id="empty-state">
+            <div class="container">
+                <div class="placeholder">
+                    <h2>🔍 Ready to Analyze</h2>
+                    <p>Search for a GitHub username to begin.</p>
+                </div>
+            </div>
+        </section>
 
-                        <h2 id="profile-name">
-                        
-                        </h2>
-
-                        <span id="profile-login"></span>
-
-<small
-    id="own-profile"
-    hidden>
-
-    ✨ This is your profile
-
-</small>
-                          
-
-                        <p id="profile-bio">
-                          
-                        </p>
-
-                        <div class="profile-meta">
-
-                            <span id="profile-location">
-                               
-                            </span>
-
-                            <span id="profile-company">
-                                
-                            </span>
-
-                            <a
-    id="profile-blog"
-    target="_blank"
-    rel="noopener noreferrer">
-                            </a>
+        <!-- Results Wrapper (Hidden by default) -->
+        <section id="results" hidden>
+            <!-- Profile Info -->
+            <section id="profile">
+                <div class="container">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img id="profile-avatar" src="" alt="GitHub Avatar" hidden>
                         </div>
-
+                        <div class="profile-info">
+                            <h2 id="profile-name"></h2>
+                            <span id="profile-login"></span>
+                            <small id="own-profile" hidden>✨ This is your profile</small>
+                            <p id="profile-bio"></p>
+                            <div class="profile-meta">
+                                <span id="profile-location"></span>
+                                <span id="profile-company"></span>
+                                <a id="profile-blog" target="_blank" rel="noopener noreferrer"></a>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
+            </section>
 
-            </div>
+            <!-- Statistics Grid -->
+            <section id="stats">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Repositories</h3>
+                            <span id="repo-count">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Followers</h3>
+                            <span id="followers-count">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Following</h3>
+                            <span id="following-count">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Stars</h3>
+                            <span id="stars-count">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Languages</h3>
+                            <span id="languages-count">-</span>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Developer Score</h3>
+                            <span id="developer-score">-</span>
+                            <small id="developer-level">Waiting...</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    </section>
+            <!-- Tech Stack Section -->
+            <section id="tech-stack">
+                <div class="container">
+                    <h2>Tech Stack</h2>
+                    <div id="tech-stack-container" class="placeholder">
+                        Waiting for analysis...
+                    </div>
+                </div>
+            </section>
 
-    <section id="stats">
+            <!-- Charts Section -->
+            <section id="charts">
+                <div class="container">
+                    <h2>Charts</h2>
+                    <div id="charts-container" class="placeholder">
+                        Charts will appear here.
+                    </div>
+                </div>
+            </section>
 
+            <!-- Repositories Timeline -->
+            <section id="repositories">
+                <div class="container">
+                    <h2>Repositories & Timeline</h2>
+                    <p class="section-description">
+                        Browse repositories with creation and last update history.
+                    </p>
+                    <div id="repositories-container" class="placeholder">
+                        No repositories yet.
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Comparison Results Panel -->
+        <section id="compare-results" hidden>
             <div class="container">
-
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-                        <h3>Repositories</h3>
-                        <span id="repo-count">-</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>Followers</h3>
-                        <span id="followers-count">-</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>Following</h3>
-                        <span id="following-count">-</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>Total Stars</h3>
-                        <span id="stars-count">-</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>Languages</h3>
-                        <span id="languages-count">-</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <h3>Developer Score</h3>
-                        <span id="developer-score">-</span>
-                        <small id="developer-level">
-        Waiting...
-    </small>
-
-                    </div>
-
-                </div>
-
+                <h2>Comparison</h2>
+                <div id="compare-content"></div>
             </div>
-
-    </section>
-
-    <section id="tech-stack">
-
-    <div class="container">
-
-                <h2>Tech Stack</h2>
-
-                <div
-                    id="tech-stack-container"
-                    class="placeholder">
-
-                    Waiting for analysis...
-
-                </div>
-
-            </div>
-
-
-    </section>
-
-    
-
-    <section id="charts">
-
-        <div class="container">
-
-                <h2>Charts</h2>
-
-                <div
-                    id="charts-container"
-                    class="placeholder">
-
-                    Charts will appear here.
-
-                </div>
-
-            </div>
-
-    </section>
-
-    <section id="repositories">
-
-    <div class="container">
-
-        <h2>Repositories & Timeline</h2>
-
-        <p class="section-description">
-            Browse repositories with creation and last update history.
-        </p>
-
-        <div
-            id="repositories-container"
-            class="placeholder">
-
-            No repositories yet.
-
-        </div>
-
-    </div>
-
-    </section>
-
-      </section>
+        </section>
     </main>
 
     <!-- Footer -->
     <footer>
-
         <div class="container">
-
-            <p>
-                GitScope © 2026
-            </p>
-
-            <small>
-                Powered by GitHub REST API
-            </small>
-
+            <p>GitScope © 2026</p>
+            <small>Powered by GitHub REST API</small>
         </div>
-
     </footer>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="js/app.js"></script>
-
 </body>
 </html>
