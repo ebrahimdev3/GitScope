@@ -46,7 +46,7 @@ Getting Started
 
 Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/GitScope.git
+git clone https://github.com/ebrahimdev3/GitScope.git
 
 Backend
 
